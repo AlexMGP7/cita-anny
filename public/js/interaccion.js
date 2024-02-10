@@ -17,7 +17,17 @@ const frasesGraciosas = [
 
 document.getElementById("noButton").addEventListener("click", () => {
     clickCount++;
-    noButton.style.filter = `blur(${clickCount / 3}px)`;
+    // Calcula máximos para x e y teniendo en cuenta el tamaño del botón
+    const maxX = window.innerWidth - noButton.offsetWidth;
+    const maxY = window.innerHeight - noButton.offsetHeight;
+
+    // Genera una posición aleatoria dentro de los límites de la ventana
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    noButton.style.position = 'fixed'; // Usa posicionamiento fijo para facilitar el movimiento
+    noButton.style.left = `${x}px`;
+    noButton.style.top = `${y}px`;
 
     let fontSize = parseInt(window.getComputedStyle(siButton).fontSize);
     let paddingVert = parseInt(
@@ -55,7 +65,7 @@ document.getElementById("siButton").addEventListener("click", () => {
 
     document.getElementById("siButton").style.display = "none";
     document.getElementById("noButton").style.display = "none";
-    
+
     const audio = new Audio('./audio/chipichipidaba.mp3');
     audio.play();
 
